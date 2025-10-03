@@ -139,11 +139,21 @@
     // Lista de artículos (ejemplos). Agrega/edita a tu gusto.
     // Campos: id, name, desc, price, currency (opcional), category, condition, qty, location, image, sold, addedAt (ISO)
     const ITEMS = [
-      { id: 1, name: "Teclado Musical Amazon", desc: "Poco uso, conexion a PM, no necesita APPs.", price: 900, category: "Música", condition: "Muy buena", qty: 1, location: "Tegucigalpa", image: "images/amazoncomposer.jpg", sold: false, addedAt: "2025-10-01" },
-      { id: 2, name: "Xbox One S 1TB", desc: "Con 2 controles y 5 juegos digitales.", price: 4500, category: "Electrónica", condition: "Excelente", qty: 1, location: "Tegucigalpa", image: "images/xbox.jpg", sold: false, addedAt: "2025-10-01" },
-      { id: 3, name: "Silla de oficina ergonómica", desc: "Apoyo lumbar, regulable en altura.", price: 1800, category: "Muebles", condition: "Buena", qty: 1, location: "Tegucigalpa", image: "images/silla.jpg", sold: false, addedAt: "2025-09-28" },
-      { id: 4, name: "Set de herramientas", desc: "Maletín con 50 piezas, poco uso.", price: 1300, category: "Herramientas", condition: "Muy buena", qty: 1, location: "Tegucigalpa", image: "images/herramientas.jpg", sold: true, addedAt: "2025-09-26" },
-      { id: 5, name: "Cafetera de goteo", desc: "Programable, 12 tazas.", price: 700, category: "Hogar", condition: "Muy buena", qty: 1, location: "Tegucigalpa", image: "images/cafetera.jpg", sold: false, addedAt: "2025-10-02" },
+      { id: 1, name: "Teclado Musical Amazon", desc: "Poco uso, conexion a PM, no necesita APPs.", price: 900, category: "Música", condition: "Muy buena", qty: 1, location: "Tegucigalpa", image: "images/amazoncomposer.jpg", sold: false, addedAt: "2025-10-01", tip: "Poco uso, solo unas 3 veces, un clasico util para hacer melodias"},
+
+      { id: 2, name: "Estufa de 1 hornilla", desc: "", price: 0, category: "Hogar", condition: "Buena", qty: 1, location: "Tegucigalpa", image: "images/estufa1hornilla.jpg", sold: false, addedAt: "2025-10-03" },
+      { id: 3, name: "Libro: Birds of Honduras", desc: "", price: 0, category: "Libros", condition: "Muy buena", qty: 1, location: "Tegucigalpa", image: "images/LibrBirdsOfHonduras.jpg", sold: false, addedAt: "2025-10-03" },
+      { id: 4, name: "Masajeador", desc: "", price: 0, category: "Salud", condition: "Muy buena", qty: 1, location: "Tegucigalpa", image: "images/masajeador.jpg", sold: false, addedAt: "2025-10-03" },
+      { id: 5, name: "Micrófono Shure PGA58", desc: "", price: 0, category: "Música", condition: "Excelente", qty: 1, location: "Tegucigalpa", image: "images/MicrofonoPGA58.jpg", sold: false, addedAt: "2025-10-03" },
+      { id: 6, name: "Interfaz Midiplus Smartface III", desc: "", price: 0, category: "Música", condition: "Muy buena", qty: 1, location: "Tegucigalpa", image: "images/midiplus-smartface-iii.jpg", sold: false, addedAt: "2025-10-03" },
+      { id: 7, name: "Controlador MIDI Midiplus Smartpad USB", desc: "", price: 0, category: "Música", condition: "Muy buena", qty: 1, location: "Tegucigalpa", image: "images/midiplussmartpadusbmidicontroller.jpg", sold: false, addedAt: "2025-10-03" },
+      { id: 8, name: "Controlador MIDI Midiplus Xpad", desc: "", price: 0, category: "Música", condition: "Muy buena", qty: 1, location: "Tegucigalpa", image: "images/MidiPlusXpad.jpg", sold: false, addedAt: "2025-10-03" },
+      { id: 9, name: "Mini teclado musical", desc: "", price: 0, category: "Música", condition: "Buena", qty: 1, location: "Tegucigalpa", image: "images/miniteclado.jpg", sold: false, addedAt: "2025-10-03" },
+      { id: 10, name: "Cafetera Nescafé Dolce Gusto", desc: "", price: 0, category: "Hogar", condition: "Muy buena", qty: 1, location: "Tegucigalpa", image: "images/nescafedolcegusto.jpg", sold: false, addedAt: "2025-10-03" },
+      { id: 11, name: "Polea de bicicleta", desc: "", price: 0, category: "Deportes", condition: "Buena", qty: 1, location: "Tegucigalpa", image: "images/Polea-de-bicicleta.jpg", sold: false, addedAt: "2025-10-03" },
+      { id: 12, name: "Tendedero Wurko", desc: "", price: 0, category: "Hogar", condition: "Buena", qty: 1, location: "Tegucigalpa", image: "images/tendederoWurko.jpg", sold: false, addedAt: "2025-10-03" },
+      { id: 13, name: "Tendedero Rayen", desc: "", price: 0, category: "Hogar", condition: "Buena", qty: 1, location: "Tegucigalpa", image: "images/tendedero_rayen.jpg", sold: false, addedAt: "2025-10-03" },
+      { id: 14, name: "Joystick Thrustmaster", desc: "", price: 0, category: "Electrónica", condition: "Buena", qty: 1, location: "Tegucigalpa", image: "images/thrusmasterjoystic.jpg", sold: false, addedAt: "2025-10-03" },
     ];
 
     // =========================
