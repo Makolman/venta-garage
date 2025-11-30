@@ -1,269 +1,52 @@
-
-
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Venta de Garaje</title>
-  <meta name="description" content="Venta de garaje: lista de artículos con precios, búsqueda y filtros. ¡Todo debe irse!" />
-  <meta property="og:title" content="Venta de Garaje" />
-  <meta property="og:description" content="Explora los artículos en venta: electrónica, hogar, herramientas y más." />
-  <meta property="og:type" content="website" />
-  <meta property="og:image" content="/images/og-image.jpg" />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-  <style>
-    :root{
-      --bg:#0f172a; /* slate-900 */
-      --surface:#111827; /* gray-900 */
-      --muted:#94a3b8; /* slate-400 */
-      --text:#e5e7eb; /* gray-200 */
-      --accent:#22d3ee; /* cyan-400 */
-      --accent-2:#a78bfa; /* violet-400 */
-      --card:#0b1220; /* deep */
-      --ok:#10b981; --warn:#f59e0b; --bad:#ef4444;
-      --ring: 0 0 0 4px rgba(34,211,238,0.25);
-    }
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial; background:linear-gradient(180deg,var(--bg),#0a0f1d); color:var(--text)}
-    a{color:inherit}
-    .container{max-width:1100px;margin:0 auto;padding:24px}
-    header{display:grid;gap:14px;align-items:center;margin:18px 0 10px}
-    .hero{background:radial-gradient(1200px 400px at 70% -50%,rgba(167,139,250,.18),transparent),
-           radial-gradient(900px 300px at -20% -30%,rgba(34,211,238,.18),transparent),
-           linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.02));
-      border:1px solid rgba(255,255,255,.08); border-radius:20px; padding:22px}
-    .title{font-size: clamp(1.3rem, 2.5vw, 2.1rem); font-weight:800; letter-spacing:-.02em}
-    .subtitle{color:var(--muted)}
-    .pill{display:inline-flex;gap:8px;align-items:center;padding:6px 10px;border-radius:999px;border:1px solid rgba(255,255,255,.1); background:rgba(255,255,255,.03); color:var(--muted); font-size:13px}
-    .pill strong{color:var(--text)}
+    <meta charset="UTF-8">
+    <title>Muestra de X</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+            font-family: Arial, sans-serif;
+            background-color: #e9f0f3;
+        }
 
-    .toolbar{display:flex;flex-wrap:wrap; gap:10px; margin:18px 0 10px}
-    .control{position:relative}
-    input[type="text"], select, input[type="range"]{background:#0a0f1d;border:1px solid rgba(255,255,255,.1); color:var(--text); padding:10px 12px;border-radius:12px;outline:none}
-    input[type="text"]:focus, select:focus{box-shadow:var(--ring); border-color:rgba(34,211,238,.6)}
-    label{font-size:12px;color:var(--muted);display:block;margin-bottom:6px}
-    .range-wrap{display:flex;align-items:center;gap:10px}
-    .range-wrap output{min-width:80px;text-align:right;color:var(--muted);font-variant-numeric:tabular-nums}
-    .checkbox{display:flex;align-items:center;gap:8px;color:var(--muted);font-size:13px}
+        .header {
+            width: 100%;
+            padding: 10px 20px;
+            box-sizing: border-box;
+            background-color: #0f172a;
+            color: #f9fafb;
+            font-size: 18px;
+            font-weight: bold;
+        }
 
-    .grid{display:grid;grid-template-columns:repeat(1,minmax(0,1fr));gap:14px;margin-top:14px}
-    @media(min-width:640px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
-    @media(min-width:980px){.grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+        .container {
+            width: 100%;
+            height: calc(100% - 48px); /* 48px aprox de header */
+        }
 
-    .card{background:linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.08); border-radius:18px; overflow:hidden; display:flex; flex-direction:column}
-    .media{position:relative; aspect-ratio:4/3; background:#0a0f1d}
-    .media img{position:absolute; inset:0; width:100%; height:100%; object-fit:cover}
-    .badge{position:absolute; top:10px; left:10px; background:rgba(17,24,39,.9); color:white; padding:6px 10px; border-radius:999px; font-size:12px; border:1px solid rgba(255,255,255,.08)}
-    .sold{background:rgba(239,68,68,.92)}
-    .content{padding:14px 14px 10px; display:flex; flex-direction:column; gap:8px}
-    .name{font-weight:700; letter-spacing:-.01em}
-    .desc{color:var(--muted); font-size:.95rem; line-height:1.35}
-    .meta{display:flex; justify-content:space-between; align-items:center; gap:10px}
-    .price{font-weight:800; font-size:1.05rem}
-    .chip{font-size:12px; padding:4px 8px; border-radius:999px; border:1px solid rgba(255,255,255,.1); color:var(--muted)}
-    .actions{display:flex; gap:8px; margin-top:6px}
-    .btn{flex:1; text-align:center; padding:10px 12px; border-radius:12px; border:1px solid rgba(255,255,255,.12); background:#0a0f1d; color:var(--text); text-decoration:none; font-weight:600}
-    .btn:hover{transform:translateY(-1px)}
-    .btn.primary{background:linear-gradient(180deg,rgba(34,211,238,.2),rgba(167,139,250,.2)); border-color:rgba(34,211,238,.5)}
-
-    footer{color:var(--muted); margin:30px 0 10px; display:flex; justify-content:space-between; gap:10px; flex-wrap:wrap}
-    .small{font-size:13px}
-    .map{color:var(--accent)}
-  </style>
+        .container iframe {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
 </head>
 <body>
-  <div class="container">
-    <header class="hero">
-      <div class="title">Venta de Garaje — <span id="sellerName">Satélite</span></div>
-      <div class="subtitle">¡Todo en excelente estado! Paga en efectivo o transferencia. Trae bolsas 😉</div>
-      <div class="pills" style="display:flex; gap:8px; flex-wrap:wrap; margin-top:6px">
-        <div class="pill">📅 <strong id="saleDate">Sábado 12 de octubre, 8:00–16:00</strong></div>
-        <div class="pill">📍 <a id="salePlace" class="map" href="#" target="_blank" rel="noopener">Col. El Sitio, Tegucigalpa</a></div>
-        <div class="pill">📞 <a id="whatsLinkTop" class="map" href="#" target="_blank" rel="noopener">WhatsApp</a></div>
-      </div>
-    </header>
 
-    <section class="toolbar">
-      <div class="control" style="min-width:220px; flex:1">
-        <label for="q">Buscar</label>
-        <input id="q" type="text" placeholder="Ej. licuadora, Xbox, silla…" />
-      </div>
-      <div class="control">
-        <label for="cat">Categoría</label>
-        <select id="cat"></select>
-      </div>
-      <div class="control">
-        <label for="sort">Ordenar</label>
-        <select id="sort">
-          <option value="new">Más recientes</option>
-          <option value="pricelh">Precio: bajo → alto</option>
-          <option value="pricehl">Precio: alto → bajo</option>
-          <option value="az">A → Z</option>
-        </select>
-      </div>
-      <div class="control">
-        <label for="max">Precio máx.</label>
-        <div class="range-wrap">
-          <input id="max" type="range" min="0" max="10000" value="10000" step="50" />
-          <output id="maxOut">L 10,000</output>
-        </div>
-      </div>
-      <label class="checkbox"><input id="onlyAvail" type="checkbox" checked /> Mostrar solo disponibles</label>
-    </section>
+    <div class="header">
+        Muestra de X
+    </div>
 
-    <main class="grid" id="grid"></main>
+    <div class="container">
+        <iframe
+            style="background: #F1F5F4;border: none;border-radius: 2px;box-shadow: 0 2px 10px 0 rgba(70, 76, 79, .2);width: 100vw;height: 100vh;"
+            src="https://charts.mongodb.com/charts-analiticapolitica-szbuk/embed/dashboards?id=5f2ff7c1-111b-4615-9e7f-24fb98d7f1a6&theme=light&autoRefresh=true&maxDataAge=3600&showTitleAndDesc=false&scalingWidth=fixed&scalingHeight=fixed">
+        </iframe>
+    </div>
 
-    <footer>
-      <div class="small">¿Dudas? Escríbeme por <a id="whatsLinkBottom" class="map" href="#" target="_blank" rel="noopener">WhatsApp</a> o por correo: <a href="mailto:ventas@example.com">ventas@example.com</a></div>
-      <div class="small">Hecho con ♥ por JLEO • <a href="#" id="shareSite">Compartir sitio</a></div>
-    </footer>
-  </div>
-
-  <script>
-    // =========================
-    // 1) CONFIGÚRALO AQUÍ
-    // =========================
-    const CONFIG = {
-      sellerName: "Satélite",
-      whatsappNumber: "34673854985", // <- Cambia a tu número, solo dígitos con lada (Honduras 504)
-      placeLabel: "Col. Satélite, Tegucigalpa",
-      placeMaps: "https://maps.google.com/?q=Col.+El+Sitio+Tegucigalpa",
-      saleDateText: "Sábado 12 de octubre, 8:00–16:00",
-      currency: "HNL", // "HNL" por Lempiras
-    };
-
-    // Lista de artículos (ejemplos). Agrega/edita a tu gusto.
-    // Campos: id, name, desc, price, currency (opcional), category, condition, qty, location, image, sold, addedAt (ISO)
-    const ITEMS = [
-      { id: 1, name: "Teclado Musical Amazon", desc: "Poco uso, conexion a PM, no necesita APPs.", price: 1400, category: "Música", condition: "Muy buena", qty: 1, location: "Tegucigalpa", image: "images/amazoncomposer.jpg", sold: false, addedAt: "2025-10-01", tip: "Poco uso, solo unas 3 veces, un clasico util para hacer melodias"},
-
-      { id: 2, name: "Estufa de 1 hornilla", desc: "", price: 300, category: "Hogar", condition: "Buena", qty: 1, location: "Tegucigalpa", image: "images/estufa1hornilla.jpg", sold: false, addedAt: "2025-10-03" },
-      { id: 3, name: "Libro: Birds of Honduras (Ingles)", desc: "", price: 350, category: "Libros", condition: "Nuevo", qty: 1, location: "Tegucigalpa", image: "images/LibrBirdsOfHonduras.jpg", sold: false, addedAt: "2025-10-03" },
-      { id: 4, name: "Masajeador de cuello", desc: "", price: 500, category: "Salud", condition: "Muy buena", qty: 1, location: "Tegucigalpa", image: "images/masajeador.jpg", sold: false, addedAt: "2025-10-03" },
-      { id: 5, name: "Micrófono Shure PGA58", desc: "", price: 1000, category: "Música", condition: "Nuevo", qty: 1, location: "Tegucigalpa", image: "images/MicrofonoPGA58.jpg", sold: false, addedAt: "2025-10-03" },
-      { id: 6, name: "Interfaz Midiplus Smartface III", desc: "", price: 1600, category: "Música", condition: "Usado en buen estado", qty: 1, location: "Tegucigalpa", image: "images/midiplus-smartface-iii.jpg", sold: false, addedAt: "2025-10-03" },
-      { id: 7, name: "Controlador MIDI Midiplus Smartpad USB", desc: "", price: 300, category: "Música", condition: "Nuevo", qty: 1, location: "Tegucigalpa", image: "images/midiplussmartpadusbmidicontroller.jpg", sold: false, addedAt: "2025-10-03" },
-      { id: 8, name: "Controlador MIDI Midiplus Xpad", desc: "", price: 300, category: "Música", condition: "Nuevo", qty: 1, location: "Tegucigalpa", image: "images/MidiPlusXpad.jpg", sold: false, addedAt: "2025-10-03" },
-      { id: 9, name: "Mini teclado", desc: "", price: 300, category: "Música", condition: "Buena", qty: 1, location: "Tegucigalpa", image: "images/miniteclado.jpg", sold: false, addedAt: "2025-10-03" },
-      { id: 10, name: "Cafetera Nescafé Dolce Gusto", desc: "", price: 1400, category: "Hogar", condition: "Usado en buen estado", qty: 1, location: "Tegucigalpa", image: "images/nescafedolcegusto.jpg", sold: false, addedAt: "2025-10-03" },
-      { id: 11, name: "Polea de bicicleta", desc: "", price: 700, category: "Deportes", condition: "Nueva", qty: 1, location: "Tegucigalpa", image: "images/Polea-de-bicicleta.jpg", sold: false, addedAt: "2025-10-03" },
-      { id: 12, name: "Tendedero retractil Wurko para interiores", desc: "", price: 600, category: "Hogar", condition: "Nuevo", qty: 1, location: "Tegucigalpa", image: "images/tendederoWurko.jpg", sold: false, addedAt: "2025-10-03" },
-      { id: 13, name: "Tendedero retractil Rayen para interiores", desc: "", price: 600, category: "Hogar", condition: "Nuevo", qty: 1, location: "Tegucigalpa", image: "images/tendedero_rayen.jpg", sold: false, addedAt: "2025-10-03" },
-      { id: 14, name: "Joystick Thrustmaster", desc: "", price: 300, category: "Electrónica", condition: "Usado en buen estado", qty: 1, location: "Tegucigalpa", image: "images/thrusmasterjoystic.jpg", sold: false, addedAt: "2025-10-03" },
-      { id: 15, name: "Termo Bala + Mate con Bombilla", desc: "", price: 450, category: "Hogar", condition: "Nuevo", qty: 1, location: "Tegucigalpa", image: "images/termomate.jpg", sold: false, addedAt: "2025-10-03" },
-    ];
-
-    // =========================
-    // 2) LÓGICA DE LA PÁGINA
-    // =========================
-    const $ = (sel, parent=document) => parent.querySelector(sel);
-    const $$ = (sel, parent=document) => [...parent.querySelectorAll(sel)];
-
-    const fmt = (value, currency=CONFIG.currency) => new Intl.NumberFormat('es-HN', {style:'currency', currency}).format(value);
-
-    function initHeader(){
-      $('#sellerName').textContent = CONFIG.sellerName;
-      $('#saleDate').textContent = CONFIG.saleDateText;
-      $('#salePlace').textContent = CONFIG.placeLabel;
-      $('#salePlace').href = CONFIG.placeMaps;
-      const wa = makeWA("Hola, tengo una consulta sobre la venta de garaje.");
-      $('#whatsLinkTop').href = wa; $('#whatsLinkBottom').href = wa;
-    }
-
-    function makeWA(text){
-      const msg = encodeURIComponent(text);
-      return `https://wa.me/${CONFIG.whatsappNumber}?text=${msg}`;
-    }
-
-    // Filtros
-    const state = { q:'', cat:'__all__', sort:'new', onlyAvail:true, max: 1000000 };
-
-    function initControls(){
-      const q = $('#q'); const cat = $('#cat'); const sort = $('#sort'); const only = $('#onlyAvail'); const max = $('#max'); const out = $('#maxOut');
-      // Categorías dinámicas
-      const cats = ['__all__', ...Array.from(new Set(ITEMS.map(i=>i.category)))];
-      cat.innerHTML = cats.map(c => `<option value="${c}">${c==='__all__'?'Todas':c}</option>`).join('');
-
-      // Rango de precio
-      const maxPrice = Math.max(...ITEMS.map(i=>i.price));
-      max.max = Math.ceil(maxPrice/50)*50;
-      max.value = max.max; state.max = +max.value; out.textContent = `${fmt(state.max, CONFIG.currency)}`;
-
-      // Listeners
-      q.addEventListener('input', ()=>{ state.q = q.value.toLowerCase(); render(); });
-      cat.addEventListener('change', ()=>{ state.cat = cat.value; render(); });
-      sort.addEventListener('change', ()=>{ state.sort = sort.value; render(); });
-      only.addEventListener('change', ()=>{ state.onlyAvail = only.checked; render(); });
-      max.addEventListener('input', ()=>{ state.max = +max.value; out.textContent = fmt(state.max, CONFIG.currency); render(); });
-
-      $('#shareSite').addEventListener('click', (e)=>{
-        e.preventDefault();
-        if (navigator.share){ navigator.share({title: document.title, text: 'Checa mi venta de garaje', url: location.href}); }
-        else { navigator.clipboard?.writeText(location.href); alert('Enlace copiado'); }
-      });
-    }
-
-    function applyFilters(items){
-      let list = [...items];
-      if (state.onlyAvail) list = list.filter(i => !i.sold && i.qty>0);
-      if (state.cat !== '__all__') list = list.filter(i => i.category === state.cat);
-      if (state.q) list = list.filter(i => (i.name+" "+i.desc).toLowerCase().includes(state.q));
-      list = list.filter(i => i.price <= state.max);
-
-      switch(state.sort){
-        case 'pricelh': list.sort((a,b)=>a.price-b.price); break;
-        case 'pricehl': list.sort((a,b)=>b.price-a.price); break;
-        case 'az': list.sort((a,b)=>a.name.localeCompare(b.name,'es')); break;
-        default: list.sort((a,b)=> new Date(b.addedAt) - new Date(a.addedAt));
-      }
-      return list;
-    }
-
-    function render(){
-      const grid = $('#grid');
-      const list = applyFilters(ITEMS);
-      grid.innerHTML = list.map(item => cardHTML(item)).join('');
-      // Wire acciones por tarjeta
-      $$('.btn.whats').forEach(btn => btn.addEventListener('click', (e)=>{
-        const id = +e.currentTarget.dataset.id;
-        const it = ITEMS.find(x=>x.id===id);
-        const text = `Hola, ¿sigue disponible *${it.name}* por ${fmt(it.price, it.currency||CONFIG.currency)}?`;
-        window.open(makeWA(text), '_blank');
-      }));
-    }
-
-    function esc(str){ return String(str).replace(/[&<>"']/g, s=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[s])); }
-
-    function cardHTML(it){
-      const price = fmt(it.price, it.currency||CONFIG.currency);
-      const sold = it.sold ? '<span class="badge sold">VENDIDO</span>' : '';
-      const img = it.image ? `<img src="${esc(it.image)}" alt="${esc(it.name)}" loading="lazy">` : '';
-      return `
-      <article class="card">
-        <div class="media">${img}${sold}</div>
-        <div class="content">
-          <div class="name">${esc(it.name)}</div>
-          <div class="desc">${esc(it.desc)}</div>
-          <div class="meta">
-            <div class="price">${price}</div>
-            <span class="chip" title="Condición">${esc(it.condition||'—')}</span>
-          </div>
-          <div class="actions">
-            <a class="btn" href="${esc(it.image||'#')}" target="_blank" rel="noopener">Ver foto</a>
-            <button class="btn primary whats" data-id="${it.id}">Preguntar</button>
-          </div>
-        </div>
-      </article>`;
-    }
-
-    // GO
-    initHeader();
-    initControls();
-    render();
-  </script>
 </body>
 </html>
